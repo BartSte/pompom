@@ -10,7 +10,8 @@
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         Icon="Assets/Pompom.ico"
-        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+        Background="{StaticResource PompomSurfaceBrush}"
+        Foreground="{StaticResource PompomTextBrush}">
     <Grid Margin="24">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -19,9 +20,16 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,0,8,0">
-                <TextBlock FontSize="24" FontWeight="SemiBold" Text="Settings" />
+                <TextBlock Foreground="{StaticResource PompomTextBrush}"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Text="Settings" />
 
-                <GroupBox Margin="0,20,0,0" Header="Timer">
+                <GroupBox Margin="0,20,0,0"
+                          Foreground="{StaticResource PompomTextBrush}">
+                    <GroupBox.Header>
+                        <TextBlock Foreground="{StaticResource PompomTextBrush}" Text="Timer" />
+                    </GroupBox.Header>
                     <Grid Margin="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -34,67 +42,95 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock VerticalAlignment="Center" Text="Work time (minutes)" />
+                        <TextBlock VerticalAlignment="Center"
+                                   Foreground="{StaticResource PompomTextBrush}"
+                                   Text="Work time (minutes)" />
                         <TextBox x:Name="WorkMinutesTextBox"
                                  Grid.Column="1"
                                  Margin="8,4,0,4"
+                                 Background="{StaticResource PompomSurfaceBrush}"
+                                 Foreground="{StaticResource PompomTextBrush}"
                                  HorizontalContentAlignment="Right" />
 
                         <TextBlock Grid.Row="1"
                                    VerticalAlignment="Center"
+                                   Foreground="{StaticResource PompomTextBrush}"
                                    Text="Short break (minutes)" />
                         <TextBox x:Name="ShortBreakMinutesTextBox"
                                  Grid.Row="1"
                                  Grid.Column="1"
                                  Margin="8,4,0,4"
+                                 Background="{StaticResource PompomSurfaceBrush}"
+                                 Foreground="{StaticResource PompomTextBrush}"
                                  HorizontalContentAlignment="Right" />
 
                         <TextBlock Grid.Row="2"
                                    VerticalAlignment="Center"
+                                   Foreground="{StaticResource PompomTextBrush}"
                                    Text="Long break (minutes)" />
                         <TextBox x:Name="LongBreakMinutesTextBox"
                                  Grid.Row="2"
                                  Grid.Column="1"
                                  Margin="8,4,0,4"
+                                 Background="{StaticResource PompomSurfaceBrush}"
+                                 Foreground="{StaticResource PompomTextBrush}"
                                  HorizontalContentAlignment="Right" />
 
                         <CheckBox x:Name="LongBreakEnabledCheckBox"
                                   Grid.Row="3"
                                   Grid.ColumnSpan="2"
                                   Margin="0,9,0,2"
+                                  Foreground="{StaticResource PompomTextBrush}"
                                   Checked="LongBreakEnabled_Changed"
                                   Unchecked="LongBreakEnabled_Changed"
                                   Content="Use a long break after four work sessions" />
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Margin="0,14,0,0" Header="Flow">
+                <GroupBox Margin="0,14,0,0"
+                          Foreground="{StaticResource PompomTextBrush}">
+                    <GroupBox.Header>
+                        <TextBlock Foreground="{StaticResource PompomTextBrush}" Text="Flow" />
+                    </GroupBox.Header>
                     <StackPanel Margin="12">
                         <CheckBox x:Name="AutoStartBreaksCheckBox"
                                   Margin="0,2,0,7"
+                                  Foreground="{StaticResource PompomTextBrush}"
                                   Content="Start breaks automatically" />
                         <CheckBox x:Name="AutoStartWorkCheckBox"
                                   Margin="0,2"
+                                  Foreground="{StaticResource PompomTextBrush}"
                                   Content="Start work sessions automatically" />
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Margin="0,14,0,0" Header="Notifications">
+                <GroupBox Margin="0,14,0,0"
+                          Foreground="{StaticResource PompomTextBrush}">
+                    <GroupBox.Header>
+                        <TextBlock Foreground="{StaticResource PompomTextBrush}" Text="Notifications" />
+                    </GroupBox.Header>
                     <StackPanel Margin="12">
                         <CheckBox x:Name="NotifyAfterWorkCheckBox"
                                   Margin="0,2,0,7"
+                                  Foreground="{StaticResource PompomTextBrush}"
                                   Content="Notify me when a work session ends" />
                         <CheckBox x:Name="NotifyAfterBreakCheckBox"
                                   Margin="0,2,0,10"
+                                  Foreground="{StaticResource PompomTextBrush}"
                                   Content="Notify me when a break ends" />
                         <Button HorizontalAlignment="Left"
                                 Padding="12,6"
+                                Foreground="{StaticResource PompomTextBrush}"
                                 Click="TestNotificationButton_Click"
                                 Content="Send test notification" />
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Margin="0,14,0,0" Header="Keyboard shortcuts">
+                <GroupBox Margin="0,14,0,0"
+                          Foreground="{StaticResource PompomTextBrush}">
+                    <GroupBox.Header>
+                        <TextBlock Foreground="{StaticResource PompomTextBrush}" Text="Keyboard shortcuts" />
+                    </GroupBox.Header>
                     <Grid Margin="12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -106,14 +142,14 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Margin="0,3" Text="Start or resume" />
-                        <TextBlock Grid.Column="1" Margin="12,3,0,3" Text="Ctrl+Alt+P" />
-                        <TextBlock Grid.Row="1" Margin="0,3" Text="Stop" />
-                        <TextBlock Grid.Row="1" Grid.Column="1" Margin="12,3,0,3" Text="Ctrl+Alt+X" />
-                        <TextBlock Grid.Row="2" Margin="0,3" Text="Skip" />
-                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="12,3,0,3" Text="Ctrl+Alt+N" />
-                        <TextBlock Grid.Row="3" Margin="0,3" Text="Show or hide" />
-                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="12,3,0,3" Text="Ctrl+Alt+M" />
+                        <TextBlock Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Start or resume" />
+                        <TextBlock Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+P" />
+                        <TextBlock Grid.Row="1" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Stop" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+X" />
+                        <TextBlock Grid.Row="2" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Skip" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+N" />
+                        <TextBlock Grid.Row="3" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Show or hide" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+M" />
                     </Grid>
                 </GroupBox>
 
@@ -131,6 +167,7 @@
             <Button MinWidth="86"
                     Margin="0,0,10,0"
                     Padding="14,8"
+                    Foreground="{StaticResource PompomTextBrush}"
                     IsCancel="True"
                     Content="Cancel" />
             <Button MinWidth="86"
