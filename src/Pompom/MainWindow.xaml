@@ -8,7 +8,8 @@
         MinHeight="450"
         WindowStartupLocation="CenterScreen"
         Icon="Assets/Pompom.ico"
-        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+        Background="{StaticResource PompomSurfaceBrush}"
+        Foreground="{StaticResource PompomTextBrush}">
     <Grid Margin="28,22,28,26">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -25,6 +26,7 @@
                 <Image Width="30" Height="30" Source="Assets/Pompom.ico" />
                 <TextBlock Margin="10,0,0,0"
                            VerticalAlignment="Center"
+                           Foreground="{StaticResource PompomTextBrush}"
                            FontSize="22"
                            FontWeight="SemiBold"
                            Text="Pompom" />
@@ -36,6 +38,7 @@
                     ToolTip="Settings"
                     Click="SettingsButton_Click">
                 <TextBlock FontFamily="Segoe Fluent Icons"
+                           Foreground="{StaticResource PompomTextBrush}"
                            FontSize="17"
                            Text="&#xE713;" />
             </Button>
@@ -47,18 +50,21 @@
                     VerticalAlignment="Center">
             <TextBlock x:Name="SessionText"
                        HorizontalAlignment="Center"
+                       Foreground="{StaticResource PompomTextBrush}"
                        FontSize="22"
                        FontWeight="SemiBold"
                        Text="Focus" />
             <TextBlock x:Name="CycleText"
                        Margin="0,5,0,0"
                        HorizontalAlignment="Center"
+                       Foreground="{StaticResource PompomTextBrush}"
                        Opacity="0.65"
                        Text="Pomodoro 1 of 4" />
 
             <TextBlock x:Name="CountdownText"
                        Margin="0,20,0,17"
                        HorizontalAlignment="Center"
+                       Foreground="{StaticResource PompomTextBrush}"
                        FontFamily="Segoe UI Variable Display, Segoe UI"
                        FontSize="76"
                        FontWeight="Light"
@@ -72,6 +78,7 @@
             <TextBlock x:Name="StatusText"
                        Margin="0,12,0,0"
                        HorizontalAlignment="Center"
+                       Foreground="{StaticResource PompomTextBrush}"
                        FontSize="13"
                        Opacity="0.65"
                        Text="Ready" />

@@ -6,6 +6,8 @@
     <Application.Resources>
         <SolidColorBrush x:Key="PompomAccentBrush" Color="#E44C4C" />
         <SolidColorBrush x:Key="PompomAccentHoverBrush" Color="#C93C42" />
+        <SolidColorBrush x:Key="PompomSurfaceBrush" Color="#FFFBFF" />
+        <SolidColorBrush x:Key="PompomTextBrush" Color="#1F1F1F" />
 
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource PompomAccentBrush}" />
@@ -40,6 +42,7 @@
         </Style>
 
         <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource PompomTextBrush}" />
             <Setter Property="Padding" Value="15,9" />
             <Setter Property="MinWidth" Value="76" />
             <Setter Property="Cursor" Value="Hand" />
