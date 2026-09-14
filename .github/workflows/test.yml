@@ -1,0 +1,33 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: windows-latest
+
+    steps:
+      - name: Get the source
+        uses: actions/checkout@v4
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Restore packages
+        run: dotnet restore Pompom.sln
+
+      - name: Build the application
+        run: dotnet build Pompom.sln --configuration Release --no-restore
+
+      - name: Run unit tests
+        run: dotnet test Pompom.sln --configuration Release --no-restore
