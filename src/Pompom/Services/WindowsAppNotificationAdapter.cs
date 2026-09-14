@@ -36,7 +36,7 @@ internal sealed class WindowsAppNotificationAdapter : IAppNotificationAdapter
         }
     }
 
-    public void Show(string title, string body)
+    public void Show(NotificationMessage message)
     {
         if (_manager is null)
         {
@@ -47,16 +47,23 @@ internal sealed class WindowsAppNotificationAdapter : IAppNotificationAdapter
             <toast launch="show">
               <visual>
                 <binding template="ToastGeneric">
-                  <text>{SecurityElement.Escape(title)}</text>
-                  <text>{SecurityElement.Escape(body)}</text>
+                  <text>{SecurityElement.Escape(message.Title)}</text>
+                  <text>{SecurityElement.Escape(message.Body)}</text>
                 </binding>
               </visual>
-              <audio src="ms-winsoundevent:Notification.Default" />
+              <audio src="{GetSoundEvent(message.Sound)}" />
             </toast>
             """;
 
         _manager.Show(new AppNotification(xml));
     }
+
+    internal static string GetSoundEvent(NotificationSound sound) => sound switch
+    {
+        NotificationSound.BreakStart => "ms-winsoundevent:Notification.IM",
+        NotificationSound.WorkStart => "ms-winsoundevent:Notification.Mail",
+        _ => "ms-winsoundevent:Notification.Default",
+    };
 
     public void Dispose()
     {

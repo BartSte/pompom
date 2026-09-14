@@ -21,7 +21,8 @@ internal static class SessionNotificationFactory
                 : "short break";
             return new NotificationMessage(
                 "Work session complete",
-                $"It is time for a {breakName}.");
+                $"It is time for a {breakName}.",
+                NotificationSound.BreakStart);
         }
 
         if (!settings.NotifyAfterBreak)
@@ -31,6 +32,7 @@ internal static class SessionNotificationFactory
 
         return new NotificationMessage(
             "Break complete",
-            "You are ready for the next work session.");
+            "You are ready for the next work session.",
+            NotificationSound.WorkStart);
     }
 }

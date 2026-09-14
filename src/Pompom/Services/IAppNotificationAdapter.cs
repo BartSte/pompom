@@ -8,5 +8,5 @@ internal interface IAppNotificationAdapter : IDisposable
 
     void Register();
 
-    void Show(string title, string body);
+    void Show(NotificationMessage message);
 }

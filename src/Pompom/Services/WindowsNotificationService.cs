@@ -34,13 +34,13 @@ internal sealed class WindowsNotificationService(
         }
     }
 
-    public void Show(string title, string body)
+    public void Show(NotificationMessage message)
     {
         if (_nativeReady)
         {
             try
             {
-                _adapter.Show(title, body);
+                _adapter.Show(message);
                 return;
             }
             catch (Exception exception) when (IsExpectedNotificationFailure(exception))
@@ -49,7 +49,7 @@ internal sealed class WindowsNotificationService(
             }
         }
 
-        _showFallback(title, body);
+        _showFallback(message.Title, message.Body);
     }
 
     public void Dispose()

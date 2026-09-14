@@ -112,7 +112,7 @@ public partial class App : System.Windows.Application
             _settings);
         if (message is not null)
         {
-            _notificationService?.Show(message.Title, message.Body);
+            _notificationService?.Show(message);
         }
     }
 
@@ -173,9 +173,10 @@ public partial class App : System.Windows.Application
         ShowMainWindow();
         var settingsWindow = new SettingsWindow(
             _settings,
-            () => _notificationService?.Show(
+            () => _notificationService?.Show(new NotificationMessage(
                 "Pompom test",
-                "Notifications are working."))
+                "Notifications are working.",
+                NotificationSound.Default)))
         {
             Owner = _mainWindow,
         };

@@ -6,5 +6,5 @@ internal interface INotificationService : IDisposable
 
     bool Initialize();
 
-    void Show(string title, string body);
+    void Show(NotificationMessage message);
 }

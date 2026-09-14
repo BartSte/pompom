@@ -12,6 +12,7 @@ system tray icon, global keyboard shortcuts, and Windows notifications.
 - Control the timer with global keyboard shortcuts.
 - Hide the window in the system tray when you close or minimize it.
 - Show native Windows notifications in Notification Center.
+- Play short, distinct Windows sounds when a break starts and when work starts.
 - Use a tray balloon when native notifications are not available.
 - Enable work and break notifications separately.
 - Keep only one Pompom process open. A second launch restores the first window.
