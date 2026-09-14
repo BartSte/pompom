@@ -17,6 +17,31 @@ public sealed class NotificationTests
         Assert.IsNotNull(message);
         Assert.AreEqual("Work session complete", message.Title);
         StringAssert.Contains(message.Body, "long break");
+        Assert.AreEqual(NotificationSound.BreakStart, message.Sound);
+    }
+
+    [TestMethod]
+    public void BreakCompletionUsesTheWorkStartSound()
+    {
+        NotificationMessage? message = SessionNotificationFactory.Create(
+            SessionType.ShortBreak,
+            SessionType.Work,
+            PompomSettings.Default);
+
+        Assert.IsNotNull(message);
+        Assert.AreEqual(NotificationSound.WorkStart, message.Sound);
+    }
+
+    [TestMethod]
+    public void SessionSoundsUseDifferentShortWindowsEvents()
+    {
+        string breakSound = WindowsAppNotificationAdapter.GetSoundEvent(
+            NotificationSound.BreakStart);
+        string workSound = WindowsAppNotificationAdapter.GetSoundEvent(
+            NotificationSound.WorkStart);
+
+        Assert.AreEqual("ms-winsoundevent:Notification.IM", breakSound);
+        Assert.AreEqual("ms-winsoundevent:Notification.Mail", workSound);
     }
 
     [TestMethod]
@@ -45,7 +70,7 @@ public sealed class NotificationTests
             (_, _) => fallbackCount++);
 
         bool initialized = service.Initialize();
-        service.Show("Title", "Body");
+        service.Show(TestMessage);
 
         Assert.IsTrue(initialized);
         Assert.IsTrue(adapter.RegisterCalled);
@@ -60,14 +85,17 @@ public sealed class NotificationTests
         NotificationMessage? fallbackMessage = null;
         using var service = new WindowsNotificationService(
             adapter,
-            (title, body) => fallbackMessage = new NotificationMessage(title, body));
+            (title, body) => fallbackMessage = new NotificationMessage(
+                title,
+                body,
+                NotificationSound.Default));
 
         bool initialized = service.Initialize();
-        service.Show("Title", "Body");
+        service.Show(TestMessage);
 
         Assert.IsFalse(initialized);
         Assert.IsFalse(adapter.RegisterCalled);
-        Assert.AreEqual(new NotificationMessage("Title", "Body"), fallbackMessage);
+        Assert.AreEqual(TestMessage, fallbackMessage);
     }
 
     [TestMethod]
@@ -84,7 +112,7 @@ public sealed class NotificationTests
             (_, _) => fallbackCount++);
         service.Initialize();
 
-        service.Show("Title", "Body");
+        service.Show(TestMessage);
 
         Assert.AreEqual(1, fallbackCount);
     }
@@ -120,7 +148,7 @@ public sealed class NotificationTests
             RegisterCalled = true;
         }
 
-        public void Show(string title, string body)
+        public void Show(NotificationMessage message)
         {
             ShowCount++;
             if (ShowException is not null)
@@ -138,4 +166,9 @@ public sealed class NotificationTests
         {
         }
     }
+
+    private static NotificationMessage TestMessage { get; } = new(
+        "Title",
+        "Body",
+        NotificationSound.Default);
 }
