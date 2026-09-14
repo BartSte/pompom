@@ -1,0 +1,143 @@
+<Window x:Class="Pompom.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pompom settings"
+        Width="470"
+        Height="650"
+        MinWidth="430"
+        MinHeight="600"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Icon="Assets/Pompom.ico"
+        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,8,0">
+                <TextBlock FontSize="24" FontWeight="SemiBold" Text="Settings" />
+
+                <GroupBox Margin="0,20,0,0" Header="Timer">
+                    <Grid Margin="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="90" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock VerticalAlignment="Center" Text="Work time (minutes)" />
+                        <TextBox x:Name="WorkMinutesTextBox"
+                                 Grid.Column="1"
+                                 Margin="8,4,0,4"
+                                 HorizontalContentAlignment="Right" />
+
+                        <TextBlock Grid.Row="1"
+                                   VerticalAlignment="Center"
+                                   Text="Short break (minutes)" />
+                        <TextBox x:Name="ShortBreakMinutesTextBox"
+                                 Grid.Row="1"
+                                 Grid.Column="1"
+                                 Margin="8,4,0,4"
+                                 HorizontalContentAlignment="Right" />
+
+                        <TextBlock Grid.Row="2"
+                                   VerticalAlignment="Center"
+                                   Text="Long break (minutes)" />
+                        <TextBox x:Name="LongBreakMinutesTextBox"
+                                 Grid.Row="2"
+                                 Grid.Column="1"
+                                 Margin="8,4,0,4"
+                                 HorizontalContentAlignment="Right" />
+
+                        <CheckBox x:Name="LongBreakEnabledCheckBox"
+                                  Grid.Row="3"
+                                  Grid.ColumnSpan="2"
+                                  Margin="0,9,0,2"
+                                  Checked="LongBreakEnabled_Changed"
+                                  Unchecked="LongBreakEnabled_Changed"
+                                  Content="Use a long break after four work sessions" />
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Margin="0,14,0,0" Header="Flow">
+                    <StackPanel Margin="12">
+                        <CheckBox x:Name="AutoStartBreaksCheckBox"
+                                  Margin="0,2,0,7"
+                                  Content="Start breaks automatically" />
+                        <CheckBox x:Name="AutoStartWorkCheckBox"
+                                  Margin="0,2"
+                                  Content="Start work sessions automatically" />
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Margin="0,14,0,0" Header="Notifications">
+                    <StackPanel Margin="12">
+                        <CheckBox x:Name="NotifyAfterWorkCheckBox"
+                                  Margin="0,2,0,7"
+                                  Content="Notify me when a work session ends" />
+                        <CheckBox x:Name="NotifyAfterBreakCheckBox"
+                                  Margin="0,2,0,10"
+                                  Content="Notify me when a break ends" />
+                        <Button HorizontalAlignment="Left"
+                                Padding="12,6"
+                                Click="TestNotificationButton_Click"
+                                Content="Send test notification" />
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Margin="0,14,0,0" Header="Keyboard shortcuts">
+                    <Grid Margin="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="0,3" Text="Start or resume" />
+                        <TextBlock Grid.Column="1" Margin="12,3,0,3" Text="Ctrl+Alt+P" />
+                        <TextBlock Grid.Row="1" Margin="0,3" Text="Stop" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Margin="12,3,0,3" Text="Ctrl+Alt+X" />
+                        <TextBlock Grid.Row="2" Margin="0,3" Text="Skip" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="12,3,0,3" Text="Ctrl+Alt+N" />
+                        <TextBlock Grid.Row="3" Margin="0,3" Text="Show or hide" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="12,3,0,3" Text="Ctrl+Alt+M" />
+                    </Grid>
+                </GroupBox>
+
+                <TextBlock x:Name="ValidationMessageText"
+                           Margin="2,12,0,0"
+                           Foreground="{StaticResource PompomAccentBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1"
+                    Margin="0,18,0,0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button MinWidth="86"
+                    Margin="0,0,10,0"
+                    Padding="14,8"
+                    IsCancel="True"
+                    Content="Cancel" />
+            <Button MinWidth="86"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    IsDefault="True"
+                    Click="SaveButton_Click"
+                    Content="Save" />
+        </StackPanel>
+    </Grid>
+</Window>
