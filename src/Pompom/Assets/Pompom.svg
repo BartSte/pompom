@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="tomato" x1="48" y1="40" x2="204" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff7a70"/>
+      <stop offset="1" stop-color="#df3e3e"/>
+    </linearGradient>
+  </defs>
+  <circle cx="128" cy="137" r="91" fill="url(#tomato)" stroke="#9f272d" stroke-width="10"/>
+  <path d="M128 54c-8-22-28-27-43-20 9 4 16 13 18 24-12-7-26-6-36 2 15 1 27 8 35 20h52c8-12 20-19 35-20-10-8-24-9-36-2 2-11 9-20 18-24-15-7-35-2-43 20z" fill="#317a52" stroke="#205b3c" stroke-linejoin="round" stroke-width="7"/>
+  <circle cx="128" cy="137" r="58" fill="#fff8f2" opacity=".96"/>
+  <circle cx="128" cy="137" r="9" fill="#9f272d"/>
+  <path d="M128 96v41l30 21" fill="none" stroke="#9f272d" stroke-linecap="round" stroke-linejoin="round" stroke-width="11"/>
+</svg>
