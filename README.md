@@ -83,6 +83,11 @@ Run the publish script from Windows PowerShell:
 .\scripts\publish.ps1
 ```
 
+The script publishes on the Windows local temporary drive first. It then copies
+the completed folder and archive to `dist`. This avoids .NET copy failures on
+the WSL network share. For a repository on a WSL share, WSL copies the final
+files. Windows does not modify `dist` through the network share.
+
 The script creates these outputs:
 
 - `dist\Pompom-win-x64\`
