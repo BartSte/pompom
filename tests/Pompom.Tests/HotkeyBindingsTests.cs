@@ -11,7 +11,7 @@ public sealed class HotkeyBindingsTests
         IReadOnlyList<HotkeyBinding> bindings = HotkeyBindings.All;
 
         CollectionAssert.AreEquivalent(
-            new[] { 1, 2, 3, 4 },
+            new[] { 1, 2, 3, 4, 5 },
             bindings.Select(binding => binding.Id).ToArray());
         CollectionAssert.AreEquivalent(
             Enum.GetValues<HotkeyAction>(),
@@ -28,6 +28,7 @@ public sealed class HotkeyBindingsTests
         Assert.AreEqual("Ctrl+Alt+P", shortcuts[HotkeyAction.Start]);
         Assert.AreEqual("Ctrl+Alt+X", shortcuts[HotkeyAction.Stop]);
         Assert.AreEqual("Ctrl+Alt+N", shortcuts[HotkeyAction.Skip]);
+        Assert.AreEqual("Ctrl+Alt+R", shortcuts[HotkeyAction.Reset]);
         Assert.AreEqual("Ctrl+Alt+M", shortcuts[HotkeyAction.ShowOrHide]);
     }
 }

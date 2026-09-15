@@ -141,6 +141,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Start or resume" />
                         <TextBlock Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+P" />
@@ -148,8 +149,10 @@
                         <TextBlock Grid.Row="1" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+X" />
                         <TextBlock Grid.Row="2" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Skip" />
                         <TextBlock Grid.Row="2" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+N" />
-                        <TextBlock Grid.Row="3" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Show or hide" />
-                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+M" />
+                        <TextBlock Grid.Row="3" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Reset" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+R" />
+                        <TextBlock Grid.Row="4" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Show or hide" />
+                        <TextBlock Grid.Row="4" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+M" />
                     </Grid>
                 </GroupBox>
 

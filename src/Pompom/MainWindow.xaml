@@ -114,7 +114,7 @@
             <Button Margin="0,10,0,0"
                     HorizontalAlignment="Center"
                     Padding="14,6"
-                    ToolTip="Reset the current session"
+                    ToolTip="Reset the current session (Ctrl+Alt+R)"
                     Click="ResetButton_Click"
                     Content="Reset" />
         </StackPanel>

@@ -27,6 +27,7 @@ exit and open it again.
 | Start or resume | `Ctrl+Alt+P` |
 | Stop and keep the remaining time | `Ctrl+Alt+X` |
 | Skip to the next session | `Ctrl+Alt+N` |
+| Reset the current session | `Ctrl+Alt+R` |
 | Show or hide the window | `Ctrl+Alt+M` |
 
 The shortcuts work while Pompom is in the system tray. If another application

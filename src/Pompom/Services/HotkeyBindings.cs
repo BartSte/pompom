@@ -7,6 +7,7 @@ internal static class HotkeyBindings
         new(1, HotkeyAction.Start, 0x50, "Ctrl+Alt+P"),
         new(2, HotkeyAction.Stop, 0x58, "Ctrl+Alt+X"),
         new(3, HotkeyAction.Skip, 0x4E, "Ctrl+Alt+N"),
-        new(4, HotkeyAction.ShowOrHide, 0x4D, "Ctrl+Alt+M"),
+        new(4, HotkeyAction.Reset, 0x52, "Ctrl+Alt+R"),
+        new(5, HotkeyAction.ShowOrHide, 0x4D, "Ctrl+Alt+M"),
     ];
 }

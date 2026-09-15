@@ -134,6 +134,9 @@ public partial class App : System.Windows.Application
             case HotkeyAction.Skip:
                 RunTimerCommand(_timerEngine.Skip);
                 break;
+            case HotkeyAction.Reset:
+                RunTimerCommand(_timerEngine.Reset);
+                break;
             case HotkeyAction.ShowOrHide:
                 ToggleMainWindow();
                 break;
