@@ -18,6 +18,7 @@ public sealed class NotificationTests
         Assert.AreEqual("Work session complete", message.Title);
         StringAssert.Contains(message.Body, "long break");
         Assert.AreEqual(NotificationSound.BreakStart, message.Sound);
+        Assert.AreEqual(TimeSpan.FromMinutes(1), message.SoundDuration);
     }
 
     [TestMethod]
@@ -33,15 +34,50 @@ public sealed class NotificationTests
     }
 
     [TestMethod]
-    public void SessionSoundsUseDifferentShortWindowsEvents()
+    public void BreakStartUsesTheLoopingAlarmSound()
     {
         string breakSound = WindowsAppNotificationAdapter.GetSoundEvent(
             NotificationSound.BreakStart);
         string workSound = WindowsAppNotificationAdapter.GetSoundEvent(
             NotificationSound.WorkStart);
 
-        Assert.AreEqual("ms-winsoundevent:Notification.IM", breakSound);
+        Assert.AreEqual("ms-winsoundevent:Notification.Looping.Alarm", breakSound);
         Assert.AreEqual("ms-winsoundevent:Notification.Mail", workSound);
+    }
+
+    [TestMethod]
+    public void WorkCompletionUsesAOneMinuteDismissibleAlarm()
+    {
+        NotificationMessage? message = SessionNotificationFactory.Create(
+            SessionType.Work,
+            SessionType.ShortBreak,
+            PompomSettings.Default);
+
+        Assert.IsNotNull(message);
+        string xml = WindowsAppNotificationAdapter.BuildXml(message);
+
+        StringAssert.Contains(xml, "scenario=\"alarm\"");
+        StringAssert.Contains(xml, "duration=\"long\"");
+        StringAssert.Contains(xml, "loop=\"true\"");
+        StringAssert.Contains(xml, "arguments=\"dismiss\"");
+        StringAssert.Contains(xml, "activationType=\"system\"");
+    }
+
+    [TestMethod]
+    public void BreakCompletionKeepsTheShortNotificationBehavior()
+    {
+        NotificationMessage? message = SessionNotificationFactory.Create(
+            SessionType.ShortBreak,
+            SessionType.Work,
+            PompomSettings.Default);
+
+        Assert.IsNotNull(message);
+        Assert.IsNull(message.SoundDuration);
+        string xml = WindowsAppNotificationAdapter.BuildXml(message);
+
+        Assert.IsFalse(xml.Contains("scenario=", StringComparison.Ordinal));
+        Assert.IsFalse(xml.Contains("loop=", StringComparison.Ordinal));
+        Assert.IsFalse(xml.Contains("<actions>", StringComparison.Ordinal));
     }
 
     [TestMethod]

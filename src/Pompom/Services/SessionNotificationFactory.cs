@@ -22,7 +22,8 @@ internal static class SessionNotificationFactory
             return new NotificationMessage(
                 "Work session complete",
                 $"It is time for a {breakName}.",
-                NotificationSound.BreakStart);
+                NotificationSound.BreakStart,
+                TimeSpan.FromMinutes(1));
         }
 
         if (!settings.NotifyAfterBreak)
