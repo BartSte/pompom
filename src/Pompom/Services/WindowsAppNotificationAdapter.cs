@@ -43,30 +43,22 @@ internal sealed class WindowsAppNotificationAdapter : IAppNotificationAdapter
             throw new InvalidOperationException("Notifications are not registered.");
         }
 
-        var notification = new AppNotification(BuildXml(message));
-        if (message.SoundDuration is { } soundDuration)
-        {
-            notification.Expiration = DateTimeOffset.Now.Add(soundDuration);
-        }
-
-        _manager.Show(notification);
+        _manager.Show(new AppNotification(BuildXml(message)));
     }
 
     internal static string BuildXml(NotificationMessage message)
     {
-        string behaviorAttributes = message.SoundDuration is null
-            ? string.Empty
-            : " scenario=\"alarm\" duration=\"long\"";
-        string audioLoopAttribute = message.SoundDuration is null
-            ? string.Empty
-            : " loop=\"true\"";
-        string actions = message.SoundDuration is null
-            ? string.Empty
-            : """
+        string behaviorAttributes = message.IsAlarm
+            ? " scenario=\"alarm\" duration=\"long\""
+            : string.Empty;
+        string audioLoopAttribute = message.IsAlarm ? " loop=\"true\"" : string.Empty;
+        string actions = message.IsAlarm
+            ? """
               <actions>
-                <action content="" arguments="dismiss" activationType="system" />
+                <action content="Dismiss" arguments="dismiss" activationType="system" />
               </actions>
-            """;
+            """
+            : string.Empty;
 
         return $"""
             <toast launch="show"{behaviorAttributes}>

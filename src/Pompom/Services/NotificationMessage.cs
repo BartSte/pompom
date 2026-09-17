@@ -4,4 +4,4 @@ internal sealed record NotificationMessage(
     string Title,
     string Body,
     NotificationSound Sound,
-    TimeSpan? SoundDuration = null);
+    bool IsAlarm = false);

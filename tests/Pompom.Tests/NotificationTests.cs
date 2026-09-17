@@ -18,7 +18,7 @@ public sealed class NotificationTests
         Assert.AreEqual("Work session complete", message.Title);
         StringAssert.Contains(message.Body, "long break");
         Assert.AreEqual(NotificationSound.BreakStart, message.Sound);
-        Assert.AreEqual(TimeSpan.FromMinutes(1), message.SoundDuration);
+        Assert.IsTrue(message.IsAlarm);
     }
 
     [TestMethod]
@@ -46,7 +46,7 @@ public sealed class NotificationTests
     }
 
     [TestMethod]
-    public void WorkCompletionUsesAOneMinuteDismissibleAlarm()
+    public void WorkCompletionUsesAnAlarmUntilDismissed()
     {
         NotificationMessage? message = SessionNotificationFactory.Create(
             SessionType.Work,
@@ -59,6 +59,7 @@ public sealed class NotificationTests
         StringAssert.Contains(xml, "scenario=\"alarm\"");
         StringAssert.Contains(xml, "duration=\"long\"");
         StringAssert.Contains(xml, "loop=\"true\"");
+        StringAssert.Contains(xml, "content=\"Dismiss\"");
         StringAssert.Contains(xml, "arguments=\"dismiss\"");
         StringAssert.Contains(xml, "activationType=\"system\"");
     }
@@ -72,7 +73,7 @@ public sealed class NotificationTests
             PompomSettings.Default);
 
         Assert.IsNotNull(message);
-        Assert.IsNull(message.SoundDuration);
+        Assert.IsFalse(message.IsAlarm);
         string xml = WindowsAppNotificationAdapter.BuildXml(message);
 
         Assert.IsFalse(xml.Contains("scenario=", StringComparison.Ordinal));

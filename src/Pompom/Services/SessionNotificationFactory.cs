@@ -23,7 +23,7 @@ internal static class SessionNotificationFactory
                 "Work session complete",
                 $"It is time for a {breakName}.",
                 NotificationSound.BreakStart,
-                TimeSpan.FromMinutes(1));
+                IsAlarm: true);
         }
 
         if (!settings.NotifyAfterBreak)
