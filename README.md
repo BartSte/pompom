@@ -1,29 +1,37 @@
-# Pompom
+<div align="center">
+  <img src="src/Pompom/Assets/Pompom.svg" width="180" alt="Pompom tomato timer icon">
 
-Pompom is a small Pomodoro timer for Windows. It provides a focused timer, a
-system tray icon, global keyboard shortcuts, and Windows notifications.
+  # 🍅 Pompom
 
-## Features
+  **A small Pomodoro timer for Windows**
 
-- Set the work, short-break, and long-break duration from 1 through 180 minutes.
-- Enable or disable the long break after four work sessions.
-- Start breaks and work sessions automatically with separate settings.
-- Start, stop, skip, or reset the current session.
-- Control the timer with global keyboard shortcuts.
-- Hide the window in the system tray when you close or minimize it.
-- Show native Windows notifications in Notification Center.
-- Show a short notification for timer actions when the window is in the system tray.
-- Play a continuous alarm when a break starts and a short sound when work starts.
-- Use a tray balloon when native notifications are not available.
-- Enable work and break notifications separately.
-- Show the application version and build commit in settings.
-- Use the optional dark theme.
-- Keep only one Pompom process open. A second launch restores the first window.
+  Focus 🎯 · Rest ☕ · Repeat 🔁
+</div>
+
+Pompom keeps your focus sessions simple. It provides a clear timer, a system
+tray icon, global keyboard shortcuts, and native Windows notifications.
+
+## ✨ Features
+
+- ⏱️ Set work, short-break, and long-break durations from 1 through 180 minutes.
+- 🍅 Start, stop, skip, or reset the current session.
+- ☕ Enable or disable a long break after four work sessions.
+- ⚡ Start breaks and work sessions automatically with separate settings.
+- ⌨️ Control the timer with global keyboard shortcuts.
+- 🪟 Hide the window in the system tray when you close or minimize it.
+- 🔔 Show native Windows notifications in Notification Center.
+- 💬 Show a short notification for timer actions while the window is in the system tray.
+- 🔊 Play a continuous alarm when a break starts and a short sound when work starts.
+- 🎈 Use a tray balloon when native Windows notifications are not available.
+- 🎚️ Enable work and break notifications separately.
+- 🏷️ Show the application version and build commit in the settings.
+- 🌙 Use the optional dark theme.
+- 1️⃣ Keep only one Pompom process open. A second launch restores the first window.
 
 Pompom does not save timer progress. It starts with a new work session after you
 exit and open it again.
 
-## Keyboard shortcuts
+## ⌨️ Keyboard shortcuts
 
 | Action | Shortcut |
 | --- | --- |
@@ -36,7 +44,7 @@ exit and open it again.
 The shortcuts work while Pompom is in the system tray. If another application
 uses a shortcut, Pompom shows a warning and continues without that shortcut.
 
-## Run the portable build
+## 🚀 Run the portable build
 
 Pompom supports 64-bit Windows 10 version 1809 or later and Windows 11.
 
@@ -49,7 +57,7 @@ not need to install a runtime.
 
 Pompom stores settings in `%LOCALAPPDATA%\Pompom\settings.json`.
 
-## Build and test
+## 🛠️ Build and test
 
 Install the .NET 10 SDK on Windows. You can install it with Scoop:
 
@@ -78,7 +86,7 @@ dotnet build Pompom.sln
 
 Replace `Arch` and the repository path with your WSL distribution and path.
 
-## Create the portable package
+## 📦 Create the portable package
 
 Run the publish script from Windows PowerShell:
 
@@ -99,7 +107,7 @@ The script creates these outputs:
 The package is a folder instead of a single executable because the native
 Windows notification components require supporting files.
 
-## Notification troubleshooting
+## 🔔 Notification troubleshooting
 
 - Open **Settings > System > Notifications** and make sure notifications are on.
 - Turn on notifications for Pompom after Windows adds it to the application list.
