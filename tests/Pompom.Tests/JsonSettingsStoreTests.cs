@@ -34,6 +34,7 @@ public sealed class JsonSettingsStoreTests
             AutoStartWork = true,
             NotifyAfterWork = false,
             NotifyAfterBreak = false,
+            DarkTheme = true,
         };
 
         store.Save(expected);
@@ -41,6 +42,7 @@ public sealed class JsonSettingsStoreTests
 
         Assert.AreEqual(expected, actual);
         StringAssert.Contains(File.ReadAllText(path), "\"workMinutes\": 45");
+        StringAssert.Contains(File.ReadAllText(path), "\"darkTheme\": true");
     }
 
     [TestMethod]

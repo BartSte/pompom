@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Windows;
 using Pompom.Core;
+using Pompom.Services;
 
 namespace Pompom;
 
@@ -12,6 +13,7 @@ public partial class SettingsWindow : Window
     {
         _sendTestNotification = sendTestNotification;
         InitializeComponent();
+        WindowAppearance.UseThemeTitleBar(this);
 
         WorkMinutesTextBox.Text = settings.WorkMinutes.ToString(CultureInfo.InvariantCulture);
         ShortBreakMinutesTextBox.Text = settings.ShortBreakMinutes.ToString(CultureInfo.InvariantCulture);
@@ -21,6 +23,9 @@ public partial class SettingsWindow : Window
         AutoStartWorkCheckBox.IsChecked = settings.AutoStartWork;
         NotifyAfterWorkCheckBox.IsChecked = settings.NotifyAfterWork;
         NotifyAfterBreakCheckBox.IsChecked = settings.NotifyAfterBreak;
+        DarkThemeCheckBox.IsChecked = settings.DarkTheme;
+        VersionText.Text = BuildInfo.Version;
+        GitCommitText.Text = BuildInfo.GitCommit;
         UpdateLongBreakInput();
     }
 
@@ -51,6 +56,7 @@ public partial class SettingsWindow : Window
             AutoStartWork = AutoStartWorkCheckBox.IsChecked == true,
             NotifyAfterWork = NotifyAfterWorkCheckBox.IsChecked == true,
             NotifyAfterBreak = NotifyAfterBreakCheckBox.IsChecked == true,
+            DarkTheme = DarkThemeCheckBox.IsChecked == true,
         };
 
         DialogResult = true;

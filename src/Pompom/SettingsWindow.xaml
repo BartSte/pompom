@@ -2,182 +2,289 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Pompom settings"
-        Width="470"
-        Height="650"
-        MinWidth="430"
-        MinHeight="600"
+        Width="720"
+        Height="760"
+        MinWidth="660"
+        MinHeight="640"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         Icon="Assets/Pompom.ico"
-        Background="{StaticResource PompomSurfaceBrush}"
-        Foreground="{StaticResource PompomTextBrush}">
-    <Grid Margin="24">
+        Background="{DynamicResource PompomSurfaceBrush}"
+        Foreground="{DynamicResource PompomTextBrush}"
+        FontFamily="Segoe UI Variable Text, Segoe UI">
+    <Grid Margin="30,26,30,28">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="0,0,8,0">
-                <TextBlock Foreground="{StaticResource PompomTextBrush}"
-                           FontSize="24"
-                           FontWeight="SemiBold"
-                           Text="Settings" />
+        <TextBlock FontFamily="Segoe UI Variable Display, Segoe UI"
+                   FontSize="30"
+                   FontWeight="SemiBold"
+                   Text="Settings" />
 
-                <GroupBox Margin="0,20,0,0"
-                          Foreground="{StaticResource PompomTextBrush}">
-                    <GroupBox.Header>
-                        <TextBlock Foreground="{StaticResource PompomTextBrush}" Text="Timer" />
-                    </GroupBox.Header>
-                    <Grid Margin="12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="90" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="1"
+                      Margin="0,24,-10,20"
+                      Padding="0,0,10,0"
+                      VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                        <TextBlock VerticalAlignment="Center"
-                                   Foreground="{StaticResource PompomTextBrush}"
-                                   Text="Work time (minutes)" />
-                        <TextBox x:Name="WorkMinutesTextBox"
-                                 Grid.Column="1"
-                                 Margin="8,4,0,4"
-                                 Background="{StaticResource PompomSurfaceBrush}"
-                                 Foreground="{StaticResource PompomTextBrush}"
-                                 HorizontalContentAlignment="Right" />
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionLabelStyle}"
+                               Text="FOCUS CYCLE" />
+                    <Border Margin="0,9,0,0"
+                            Padding="16"
+                            Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="1"
-                                   VerticalAlignment="Center"
-                                   Foreground="{StaticResource PompomTextBrush}"
-                                   Text="Short break (minutes)" />
-                        <TextBox x:Name="ShortBreakMinutesTextBox"
-                                 Grid.Row="1"
-                                 Grid.Column="1"
-                                 Margin="8,4,0,4"
-                                 Background="{StaticResource PompomSurfaceBrush}"
-                                 Foreground="{StaticResource PompomTextBrush}"
-                                 HorizontalContentAlignment="Right" />
+                                <StackPanel>
+                                    <TextBlock HorizontalAlignment="Center"
+                                               Style="{StaticResource MutedTextStyle}"
+                                               FontSize="12"
+                                               Text="Focus" />
+                                    <TextBox x:Name="WorkMinutesTextBox"
+                                             Margin="0,7,0,0"
+                                             Style="{StaticResource FieldTextBoxStyle}" />
+                                    <TextBlock Margin="0,5,0,0"
+                                               HorizontalAlignment="Center"
+                                               Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11"
+                                               Text="min" />
+                                </StackPanel>
 
-                        <TextBlock Grid.Row="2"
-                                   VerticalAlignment="Center"
-                                   Foreground="{StaticResource PompomTextBrush}"
-                                   Text="Long break (minutes)" />
-                        <TextBox x:Name="LongBreakMinutesTextBox"
-                                 Grid.Row="2"
-                                 Grid.Column="1"
-                                 Margin="8,4,0,4"
-                                 Background="{StaticResource PompomSurfaceBrush}"
-                                 Foreground="{StaticResource PompomTextBrush}"
-                                 HorizontalContentAlignment="Right" />
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               Style="{StaticResource MutedTextStyle}"
+                                               FontSize="12"
+                                               Text="Short" />
+                                    <TextBox x:Name="ShortBreakMinutesTextBox"
+                                             Margin="0,7,0,0"
+                                             Style="{StaticResource FieldTextBoxStyle}" />
+                                    <TextBlock Margin="0,5,0,0"
+                                               HorizontalAlignment="Center"
+                                               Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11"
+                                               Text="min" />
+                                </StackPanel>
 
-                        <CheckBox x:Name="LongBreakEnabledCheckBox"
-                                  Grid.Row="3"
-                                  Grid.ColumnSpan="2"
-                                  Margin="0,9,0,2"
-                                  Foreground="{StaticResource PompomTextBrush}"
-                                  Checked="LongBreakEnabled_Changed"
-                                  Unchecked="LongBreakEnabled_Changed"
-                                  Content="Use a long break after four work sessions" />
-                    </Grid>
-                </GroupBox>
+                                <StackPanel Grid.Column="4">
+                                    <TextBlock HorizontalAlignment="Center"
+                                               Style="{StaticResource MutedTextStyle}"
+                                               FontSize="12"
+                                               Text="Long" />
+                                    <TextBox x:Name="LongBreakMinutesTextBox"
+                                             Margin="0,7,0,0"
+                                             Style="{StaticResource FieldTextBoxStyle}" />
+                                    <TextBlock Margin="0,5,0,0"
+                                               HorizontalAlignment="Center"
+                                               Style="{StaticResource MutedTextStyle}"
+                                               FontSize="11"
+                                               Text="min" />
+                                </StackPanel>
+                            </Grid>
 
-                <GroupBox Margin="0,14,0,0"
-                          Foreground="{StaticResource PompomTextBrush}">
-                    <GroupBox.Header>
-                        <TextBlock Foreground="{StaticResource PompomTextBrush}" Text="Flow" />
-                    </GroupBox.Header>
-                    <StackPanel Margin="12">
-                        <CheckBox x:Name="AutoStartBreaksCheckBox"
-                                  Margin="0,2,0,7"
-                                  Foreground="{StaticResource PompomTextBrush}"
-                                  Content="Start breaks automatically" />
-                        <CheckBox x:Name="AutoStartWorkCheckBox"
-                                  Margin="0,2"
-                                  Foreground="{StaticResource PompomTextBrush}"
-                                  Content="Start work sessions automatically" />
-                    </StackPanel>
-                </GroupBox>
+                            <Border Margin="0,14,0,8"
+                                    Height="1"
+                                    Background="{DynamicResource PompomTrackBrush}" />
+                            <CheckBox x:Name="LongBreakEnabledCheckBox"
+                                      Style="{StaticResource SwitchStyle}"
+                                      Checked="LongBreakEnabled_Changed"
+                                      Unchecked="LongBreakEnabled_Changed"
+                                      Content="Long break after four sessions" />
+                        </StackPanel>
+                    </Border>
 
-                <GroupBox Margin="0,14,0,0"
-                          Foreground="{StaticResource PompomTextBrush}">
-                    <GroupBox.Header>
-                        <TextBlock Foreground="{StaticResource PompomTextBrush}" Text="Notifications" />
-                    </GroupBox.Header>
-                    <StackPanel Margin="12">
-                        <CheckBox x:Name="NotifyAfterWorkCheckBox"
-                                  Margin="0,2,0,7"
-                                  Foreground="{StaticResource PompomTextBrush}"
-                                  Content="Notify me when a work session ends" />
-                        <CheckBox x:Name="NotifyAfterBreakCheckBox"
-                                  Margin="0,2,0,10"
-                                  Foreground="{StaticResource PompomTextBrush}"
-                                  Content="Notify me when a break ends" />
-                        <Button HorizontalAlignment="Left"
-                                Padding="12,6"
-                                Foreground="{StaticResource PompomTextBrush}"
-                                Click="TestNotificationButton_Click"
-                                Content="Send test notification" />
-                    </StackPanel>
-                </GroupBox>
+                    <TextBlock Margin="0,24,0,0"
+                               Style="{StaticResource SectionLabelStyle}"
+                               Text="ROUTINE" />
+                    <Border Margin="0,9,0,0"
+                            Padding="11,10"
+                            Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <CheckBox x:Name="AutoStartBreaksCheckBox"
+                                      Style="{StaticResource SwitchStyle}"
+                                      Content="Start breaks automatically" />
+                            <Border Margin="5,4"
+                                    Height="1"
+                                    Background="{DynamicResource PompomTrackBrush}" />
+                            <CheckBox x:Name="AutoStartWorkCheckBox"
+                                      Style="{StaticResource SwitchStyle}"
+                                      Content="Start focus automatically" />
+                        </StackPanel>
+                    </Border>
 
-                <GroupBox Margin="0,14,0,0"
-                          Foreground="{StaticResource PompomTextBrush}">
-                    <GroupBox.Header>
-                        <TextBlock Foreground="{StaticResource PompomTextBrush}" Text="Keyboard shortcuts" />
-                    </GroupBox.Header>
-                    <Grid Margin="12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Start or resume" />
-                        <TextBlock Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+P" />
-                        <TextBlock Grid.Row="1" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Stop" />
-                        <TextBlock Grid.Row="1" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+X" />
-                        <TextBlock Grid.Row="2" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Skip" />
-                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+N" />
-                        <TextBlock Grid.Row="3" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Reset" />
-                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+R" />
-                        <TextBlock Grid.Row="4" Margin="0,3" Foreground="{StaticResource PompomTextBrush}" Text="Show or hide" />
-                        <TextBlock Grid.Row="4" Grid.Column="1" Margin="12,3,0,3" Foreground="{StaticResource PompomTextBrush}" Text="Ctrl+Alt+M" />
-                    </Grid>
-                </GroupBox>
+                    <TextBlock Margin="0,24,0,0"
+                               Style="{StaticResource SectionLabelStyle}"
+                               Text="APPEARANCE" />
+                    <Border Margin="0,9,0,0"
+                            Padding="11,10"
+                            Style="{StaticResource CardStyle}">
+                        <CheckBox x:Name="DarkThemeCheckBox"
+                                  Style="{StaticResource SwitchStyle}"
+                                  Content="Use dark theme" />
+                    </Border>
+                </StackPanel>
 
-                <TextBlock x:Name="ValidationMessageText"
-                           Margin="2,12,0,0"
-                           Foreground="{StaticResource PompomAccentBrush}"
-                           TextWrapping="Wrap" />
-            </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Style="{StaticResource SectionLabelStyle}"
+                               Text="NOTIFICATIONS" />
+                    <Border Margin="0,9,0,0"
+                            Padding="11,10"
+                            Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <CheckBox x:Name="NotifyAfterWorkCheckBox"
+                                      Style="{StaticResource SwitchStyle}"
+                                      Content="When a focus session ends" />
+                            <Border Margin="5,4"
+                                    Height="1"
+                                    Background="{DynamicResource PompomTrackBrush}" />
+                            <CheckBox x:Name="NotifyAfterBreakCheckBox"
+                                      Style="{StaticResource SwitchStyle}"
+                                      Content="When a break ends" />
+                            <Button Margin="5,8,0,0"
+                                    Padding="0,8"
+                                    HorizontalAlignment="Left"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Click="TestNotificationButton_Click"
+                                    Content="Send test notification" />
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Margin="0,24,0,0"
+                               Style="{StaticResource SectionLabelStyle}"
+                               Text="KEYBOARD" />
+                    <Border Margin="0,9,0,0"
+                            Padding="16,12"
+                            Style="{StaticResource CardStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28" />
+                                <RowDefinition Height="28" />
+                                <RowDefinition Height="28" />
+                                <RowDefinition Height="28" />
+                                <RowDefinition Height="28" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock VerticalAlignment="Center" FontSize="12" Text="Start or resume" />
+                            <TextBlock Grid.Row="1" VerticalAlignment="Center" FontSize="12" Text="Stop" />
+                            <TextBlock Grid.Row="2" VerticalAlignment="Center" FontSize="12" Text="Skip" />
+                            <TextBlock Grid.Row="3" VerticalAlignment="Center" FontSize="12" Text="Reset" />
+                            <TextBlock Grid.Row="4" VerticalAlignment="Center" FontSize="12" Text="Show or hide" />
+
+                            <TextBlock Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource MutedTextStyle}"
+                                       FontFamily="Cascadia Mono, Consolas"
+                                       FontSize="11"
+                                       Text="Ctrl + Alt + P" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource MutedTextStyle}"
+                                       FontFamily="Cascadia Mono, Consolas"
+                                       FontSize="11"
+                                       Text="Ctrl + Alt + X" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource MutedTextStyle}"
+                                       FontFamily="Cascadia Mono, Consolas"
+                                       FontSize="11"
+                                       Text="Ctrl + Alt + N" />
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource MutedTextStyle}"
+                                       FontFamily="Cascadia Mono, Consolas"
+                                       FontSize="11"
+                                       Text="Ctrl + Alt + R" />
+                            <TextBlock Grid.Row="4"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource MutedTextStyle}"
+                                       FontFamily="Cascadia Mono, Consolas"
+                                       FontSize="11"
+                                       Text="Ctrl + Alt + M" />
+                        </Grid>
+                    </Border>
+
+                    <TextBlock Margin="0,24,0,0"
+                               Style="{StaticResource SectionLabelStyle}"
+                               Text="ABOUT" />
+                    <Border Margin="0,9,0,0"
+                            Padding="16,10"
+                            Style="{StaticResource CardStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27" />
+                                <RowDefinition Height="27" />
+                            </Grid.RowDefinitions>
+                            <TextBlock VerticalAlignment="Center" FontSize="12" Text="Version" />
+                            <TextBlock Grid.Row="1" VerticalAlignment="Center" FontSize="12" Text="Git commit" />
+                            <TextBlock x:Name="VersionText"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource MutedTextStyle}"
+                                       FontSize="12" />
+                            <TextBlock x:Name="GitCommitText"
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource MutedTextStyle}"
+                                       FontFamily="Cascadia Mono, Consolas"
+                                       FontSize="11" />
+                        </Grid>
+                    </Border>
+
+                    <TextBlock x:Name="ValidationMessageText"
+                               Margin="2,12,0,0"
+                               Foreground="{DynamicResource PompomAccentBrush}"
+                               FontSize="12"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Grid>
         </ScrollViewer>
 
-        <StackPanel Grid.Row="1"
-                    Margin="0,18,0,0"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal">
-            <Button MinWidth="86"
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1"
                     Margin="0,0,10,0"
-                    Padding="14,8"
-                    Foreground="{StaticResource PompomTextBrush}"
+                    Style="{StaticResource SecondaryButtonStyle}"
                     IsCancel="True"
                     Content="Cancel" />
-            <Button MinWidth="86"
+            <Button Grid.Column="2"
+                    MinWidth="104"
                     Style="{StaticResource PrimaryButtonStyle}"
                     IsDefault="True"
                     Click="SaveButton_Click"
                     Content="Save" />
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>

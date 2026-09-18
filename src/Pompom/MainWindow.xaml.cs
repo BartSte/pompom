@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Windows;
 using Pompom.Core;
+using Pompom.Services;
 
 namespace Pompom;
 
@@ -12,12 +13,15 @@ public partial class MainWindow : Window
     {
         _timerEngine = timerEngine;
         InitializeComponent();
+        WindowAppearance.UseThemeTitleBar(this);
         Closing += OnClosing;
         StateChanged += OnStateChanged;
         RefreshTimer();
     }
 
     public event EventHandler? SettingsRequested;
+
+    internal event EventHandler<HotkeyPressedEventArgs>? TimerCommandRequested;
 
     public bool AllowClose { get; set; }
 
@@ -34,14 +38,17 @@ public partial class MainWindow : Window
             TimerStatus.Idle => "Ready",
             _ => string.Empty,
         };
-
         double progress = snapshot.Duration <= TimeSpan.Zero
             ? 0
             : 1 - (snapshot.Remaining.TotalMilliseconds / snapshot.Duration.TotalMilliseconds);
         SessionProgress.Value = Math.Clamp(progress, 0, 1);
         StartButton.Content = snapshot.Status == TimerStatus.Paused ? "Resume" : "Start";
-        StartButton.IsEnabled = snapshot.Status != TimerStatus.Running;
-        StopButton.IsEnabled = snapshot.Status == TimerStatus.Running;
+        StartButton.Visibility = snapshot.Status == TimerStatus.Running
+            ? Visibility.Collapsed
+            : Visibility.Visible;
+        StopButton.Visibility = snapshot.Status == TimerStatus.Running
+            ? Visibility.Visible
+            : Visibility.Collapsed;
     }
 
     internal static string GetSessionName(SessionType session)
@@ -67,26 +74,22 @@ public partial class MainWindow : Window
 
     private void StartButton_Click(object sender, RoutedEventArgs eventArgs)
     {
-        _timerEngine.Start();
-        RefreshTimer();
+        TimerCommandRequested?.Invoke(this, new HotkeyPressedEventArgs(HotkeyAction.Start));
     }
 
     private void StopButton_Click(object sender, RoutedEventArgs eventArgs)
     {
-        _timerEngine.Pause();
-        RefreshTimer();
+        TimerCommandRequested?.Invoke(this, new HotkeyPressedEventArgs(HotkeyAction.Stop));
     }
 
     private void SkipButton_Click(object sender, RoutedEventArgs eventArgs)
     {
-        _timerEngine.Skip();
-        RefreshTimer();
+        TimerCommandRequested?.Invoke(this, new HotkeyPressedEventArgs(HotkeyAction.Skip));
     }
 
     private void ResetButton_Click(object sender, RoutedEventArgs eventArgs)
     {
-        _timerEngine.Reset();
-        RefreshTimer();
+        TimerCommandRequested?.Invoke(this, new HotkeyPressedEventArgs(HotkeyAction.Reset));
     }
 
     private void SettingsButton_Click(object sender, RoutedEventArgs eventArgs)

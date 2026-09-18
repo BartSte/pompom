@@ -24,6 +24,8 @@ internal sealed record PompomSettings
 
     public bool NotifyAfterBreak { get; init; } = true;
 
+    public bool DarkTheme { get; init; }
+
     public static PompomSettings Default { get; } = new();
 
     public PompomSettings Normalize()

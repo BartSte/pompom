@@ -2,38 +2,73 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              ShutdownMode="OnExplicitShutdown"
-             ThemeMode="System">
+             ThemeMode="Light">
     <Application.Resources>
-        <SolidColorBrush x:Key="PompomAccentBrush" Color="#E44C4C" />
-        <SolidColorBrush x:Key="PompomAccentHoverBrush" Color="#C93C42" />
-        <SolidColorBrush x:Key="PompomSurfaceBrush" Color="#FFFBFF" />
-        <SolidColorBrush x:Key="PompomTextBrush" Color="#1F1F1F" />
+        <SolidColorBrush x:Key="PompomAccentBrush" Color="#E84F45" />
+        <SolidColorBrush x:Key="PompomAccentHoverBrush" Color="#D94239" />
+        <SolidColorBrush x:Key="PompomAccentSoftBrush" Color="#FFF0ED" />
+        <SolidColorBrush x:Key="PompomGreenBrush" Color="#397454" />
+        <SolidColorBrush x:Key="PompomSurfaceBrush" Color="#F6F2EC" />
+        <SolidColorBrush x:Key="PompomCardBrush" Color="#FFFCF9" />
+        <SolidColorBrush x:Key="PompomTextBrush" Color="#211E1C" />
+        <SolidColorBrush x:Key="PompomMutedTextBrush" Color="#655E59" />
+        <SolidColorBrush x:Key="PompomSectionTextBrush" Color="#514B47" />
+        <SolidColorBrush x:Key="PompomBorderBrush" Color="#E5DDD5" />
+        <SolidColorBrush x:Key="PompomTrackBrush" Color="#D8CEC4" />
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+        </Style>
+
+        <Style x:Key="MutedTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource PompomMutedTextBrush}" />
+        </Style>
+
+        <Style x:Key="SectionLabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource PompomSectionTextBrush}" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource PompomCardBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PompomBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="Padding" Value="18" />
+        </Style>
 
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource PompomAccentBrush}" />
+            <Setter Property="Background" Value="{DynamicResource PompomAccentBrush}" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Padding" Value="18,10" />
+            <Setter Property="Padding" Value="24,13" />
+            <Setter Property="MinHeight" Value="48" />
+            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontSize" Value="15" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="Border"
+                        <Border x:Name="ButtonSurface"
                                 Background="{TemplateBinding Background}"
-                                CornerRadius="7"
+                                CornerRadius="14"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border"
+                                <Setter TargetName="ButtonSurface"
                                         Property="Background"
-                                        Value="{StaticResource PompomAccentHoverBrush}" />
+                                        Value="{DynamicResource PompomAccentHoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonSurface" Property="Opacity" Value="0.84" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Border" Property="Opacity" Value="0.45" />
+                                <Setter TargetName="ButtonSurface" Property="Opacity" Value="0.38" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -42,10 +77,182 @@
         </Style>
 
         <Style x:Key="SecondaryButtonStyle" TargetType="Button">
-            <Setter Property="Foreground" Value="{StaticResource PompomTextBrush}" />
-            <Setter Property="Padding" Value="15,9" />
-            <Setter Property="MinWidth" Value="76" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource PompomTextBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="14,10" />
+            <Setter Property="MinHeight" Value="42" />
+            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonSurface"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="12"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonSurface"
+                                        Property="Background"
+                                        Value="{DynamicResource PompomAccentSoftBrush}" />
+                                <Setter Property="Foreground"
+                                        Value="{DynamicResource PompomAccentBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonSurface" Property="Opacity" Value="0.7" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="ButtonSurface" Property="Opacity" Value="0.35" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource SecondaryButtonStyle}">
+            <Setter Property="Width" Value="42" />
+            <Setter Property="Height" Value="42" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontFamily" Value="Segoe Fluent Icons" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style x:Key="PompomProgressStyle" TargetType="ProgressBar">
+            <Setter Property="Height" Value="5" />
+            <Setter Property="Background" Value="{DynamicResource PompomTrackBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource PompomAccentBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="3">
+                            <Grid x:Name="PART_Track">
+                                <Border x:Name="PART_Indicator"
+                                        HorizontalAlignment="Left"
+                                        Background="{TemplateBinding Foreground}"
+                                        CornerRadius="3" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FieldTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="48" />
+            <Setter Property="Padding" Value="8,0" />
+            <Setter Property="Background" Value="{DynamicResource PompomCardBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource PompomTextBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PompomBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="FieldBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="12">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="FieldBorder"
+                                        Property="BorderBrush"
+                                        Value="{DynamicResource PompomAccentBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="FieldBorder" Property="Opacity" Value="0.45" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SwitchStyle" TargetType="CheckBox">
+            <Setter Property="MinHeight" Value="40" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="{DynamicResource PompomTextBrush}" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Border x:Name="FocusBorder"
+                                MinHeight="40"
+                                Padding="5,0"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                BorderThickness="1"
+                                CornerRadius="9">
+                            <Grid>
+                                <ContentPresenter Margin="0,0,58,0"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True" />
+                                <Border x:Name="SwitchTrack"
+                                        Width="44"
+                                        Height="26"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Background="{DynamicResource PompomTrackBrush}"
+                                        CornerRadius="13">
+                                    <Ellipse x:Name="SwitchThumb"
+                                             Width="20"
+                                             Height="20"
+                                             Margin="3"
+                                             HorizontalAlignment="Left"
+                                             Fill="White" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="SwitchTrack"
+                                        Property="Background"
+                                        Value="{DynamicResource PompomGreenBrush}" />
+                                <Setter TargetName="SwitchThumb"
+                                        Property="HorizontalAlignment"
+                                        Value="Right" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="SwitchTrack" Property="Opacity" Value="0.84" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="FocusBorder"
+                                        Property="BorderBrush"
+                                        Value="{DynamicResource PompomAccentBrush}" />
+                                <Setter TargetName="FocusBorder"
+                                        Property="Background"
+                                        Value="{DynamicResource PompomAccentSoftBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="SwitchTrack" Property="Opacity" Value="0.4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Application.Resources>
 </Application>

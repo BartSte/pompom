@@ -39,18 +39,20 @@ public partial class App : System.Windows.Application
 
         _settingsStore = new JsonSettingsStore();
         _settings = _settingsStore.Load();
+        AppTheme.Apply(_settings.DarkTheme);
         _timerEngine = new TimerEngine(_settings);
         _timerEngine.SessionCompleted += OnSessionCompleted;
 
         _mainWindow = new MainWindow(_timerEngine);
         MainWindow = _mainWindow;
         _mainWindow.SettingsRequested += (_, _) => OpenSettings();
+        _mainWindow.TimerCommandRequested += OnHotkeyPressed;
 
         _trayIcon = new TrayIconService();
         _trayIcon.ShowRequested += (_, _) => ShowMainWindow();
-        _trayIcon.StartRequested += (_, _) => RunTimerCommand(_timerEngine.Start);
-        _trayIcon.StopRequested += (_, _) => RunTimerCommand(_timerEngine.Pause);
-        _trayIcon.SkipRequested += (_, _) => RunTimerCommand(_timerEngine.Skip);
+        _trayIcon.StartRequested += (_, _) => RunTimerCommand(HotkeyAction.Start, _timerEngine.Start);
+        _trayIcon.StopRequested += (_, _) => RunTimerCommand(HotkeyAction.Stop, _timerEngine.Pause);
+        _trayIcon.SkipRequested += (_, _) => RunTimerCommand(HotkeyAction.Skip, _timerEngine.Skip);
         _trayIcon.SettingsRequested += (_, _) => OpenSettings();
         _trayIcon.ExitRequested += (_, _) => ExitApplication();
 
@@ -126,16 +128,16 @@ public partial class App : System.Windows.Application
         switch (eventArgs.Action)
         {
             case HotkeyAction.Start:
-                RunTimerCommand(_timerEngine.Start);
+                RunTimerCommand(HotkeyAction.Start, _timerEngine.Start);
                 break;
             case HotkeyAction.Stop:
-                RunTimerCommand(_timerEngine.Pause);
+                RunTimerCommand(HotkeyAction.Stop, _timerEngine.Pause);
                 break;
             case HotkeyAction.Skip:
-                RunTimerCommand(_timerEngine.Skip);
+                RunTimerCommand(HotkeyAction.Skip, _timerEngine.Skip);
                 break;
             case HotkeyAction.Reset:
-                RunTimerCommand(_timerEngine.Reset);
+                RunTimerCommand(HotkeyAction.Reset, _timerEngine.Reset);
                 break;
             case HotkeyAction.ShowOrHide:
                 ToggleMainWindow();
@@ -145,10 +147,26 @@ public partial class App : System.Windows.Application
         }
     }
 
-    private void RunTimerCommand(Action command)
+    private void RunTimerCommand(HotkeyAction action, Action command)
     {
+        bool isInTray = _mainWindow?.IsVisible != true;
+        TimerSnapshot before = _timerEngine!.Snapshot;
         command();
         RefreshViews();
+
+        if (!isInTray)
+        {
+            return;
+        }
+
+        NotificationMessage? message = TimerCommandNotificationFactory.Create(
+            action,
+            before,
+            _timerEngine.Snapshot);
+        if (message is not null)
+        {
+            _notificationService?.Show(message);
+        }
     }
 
     private void RefreshViews()
@@ -194,6 +212,7 @@ public partial class App : System.Windows.Application
         {
             _settingsStore.Save(newSettings);
             _settings = newSettings.Normalize();
+            AppTheme.Apply(_settings.DarkTheme);
             _timerEngine.UpdateSettings(_settings);
             RefreshViews();
         }

@@ -7,6 +7,52 @@ namespace Pompom.Tests;
 public sealed class NotificationTests
 {
     [TestMethod]
+    public void TimerStartCreatesANotification()
+    {
+        TimerSnapshot before = CreateSnapshot(SessionType.Work, TimerStatus.Idle);
+        TimerSnapshot after = CreateSnapshot(SessionType.Work, TimerStatus.Running);
+
+        NotificationMessage? message = TimerCommandNotificationFactory.Create(
+            HotkeyAction.Start,
+            before,
+            after);
+
+        Assert.IsNotNull(message);
+        Assert.AreEqual("Timer started", message.Title);
+        Assert.AreEqual("The focus timer is running.", message.Body);
+        Assert.AreEqual(NotificationSound.Default, message.Sound);
+    }
+
+    [TestMethod]
+    public void TimerStopCreatesANotification()
+    {
+        TimerSnapshot before = CreateSnapshot(SessionType.Work, TimerStatus.Running);
+        TimerSnapshot after = CreateSnapshot(SessionType.Work, TimerStatus.Paused);
+
+        NotificationMessage? message = TimerCommandNotificationFactory.Create(
+            HotkeyAction.Stop,
+            before,
+            after);
+
+        Assert.IsNotNull(message);
+        Assert.AreEqual("Timer stopped", message.Title);
+        Assert.AreEqual("The focus timer is paused.", message.Body);
+    }
+
+    [TestMethod]
+    public void TimerCommandsDoNotNotifyForAnUnchangedState()
+    {
+        TimerSnapshot snapshot = CreateSnapshot(SessionType.Work, TimerStatus.Running);
+
+        NotificationMessage? message = TimerCommandNotificationFactory.Create(
+            HotkeyAction.Start,
+            snapshot,
+            snapshot);
+
+        Assert.IsNull(message);
+    }
+
+    [TestMethod]
     public void WorkCompletionNamesLongBreak()
     {
         NotificationMessage? message = SessionNotificationFactory.Create(
@@ -208,4 +254,11 @@ public sealed class NotificationTests
         "Title",
         "Body",
         NotificationSound.Default);
+
+    private static TimerSnapshot CreateSnapshot(SessionType session, TimerStatus status) => new(
+        session,
+        status,
+        TimeSpan.FromMinutes(25),
+        TimeSpan.FromMinutes(25),
+        0);
 }

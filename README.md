@@ -12,9 +12,12 @@ system tray icon, global keyboard shortcuts, and Windows notifications.
 - Control the timer with global keyboard shortcuts.
 - Hide the window in the system tray when you close or minimize it.
 - Show native Windows notifications in Notification Center.
+- Show a short notification for timer actions when the window is in the system tray.
 - Play a continuous alarm when a break starts and a short sound when work starts.
 - Use a tray balloon when native notifications are not available.
 - Enable work and break notifications separately.
+- Show the application version and build commit in settings.
+- Use the optional dark theme.
 - Keep only one Pompom process open. A second launch restores the first window.
 
 Pompom does not save timer progress. It starts with a new work session after you
