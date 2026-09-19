@@ -10,6 +10,7 @@
 
 - `global.json` requires .NET SDK 10.0.401.
 - Make sure that `dotnet.exe` resolves to a Windows SDK that satisfies `global.json`.
+- If the system-level SDK does not satisfy `global.json`, use the user-level `dotnet.exe` installed with Scoop.
 - Run `dotnet.exe --version` before a build if more than one Windows SDK installation is available.
 
 ## Build and test from WSL
@@ -28,5 +29,5 @@ Run the built test assembly directly, as shown above.
 ## Windows behavior
 
 - Unit tests can validate notification XML, but they cannot validate Windows notification behavior.
-- For notification changes, use **Send test notification** and do a manual check on Windows.
+- For notification changes, use **Send test alarm** and do a manual check on Windows.
 - For an alarm, make sure that the sound continues until you select **Dismiss**.
