@@ -161,7 +161,7 @@
                                     HorizontalAlignment="Left"
                                     Style="{StaticResource SecondaryButtonStyle}"
                                     Click="TestNotificationButton_Click"
-                                    Content="Send test notification" />
+                                    Content="Send test alarm" />
                         </StackPanel>
                     </Border>
 

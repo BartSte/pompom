@@ -195,9 +195,10 @@ public partial class App : System.Windows.Application
         var settingsWindow = new SettingsWindow(
             _settings,
             () => _notificationService?.Show(new NotificationMessage(
-                "Pompom test",
-                "Notifications are working.",
-                NotificationSound.Default)))
+                "Pompom alarm test",
+                "The alarm must continue until you select Dismiss.",
+                NotificationSound.BreakStart,
+                IsAlarm: true)))
         {
             Owner = _mainWindow,
         };
